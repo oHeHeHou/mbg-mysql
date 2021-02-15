@@ -75,6 +75,7 @@ public abstract class IntrospectedTable {
         ATTR_COUNT_BY_EXAMPLE_STATEMENT_ID,
         ATTR_DELETE_BY_EXAMPLE_STATEMENT_ID,
         ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID,
+        ATTR_DELETE_BY_BATCH_IDS_STATEMENT_ID,
         ATTR_INSERT_STATEMENT_ID,
         ATTR_INSERT_SELECTIVE_STATEMENT_ID,
         ATTR_SELECT_ALL_STATEMENT_ID,
@@ -399,6 +400,9 @@ public abstract class IntrospectedTable {
         context.getPlugins().initialized(this);
     }
 
+    /**
+     * 这里是对xml的statement-id默认值初始化
+     */
     protected void calculateXmlAttributes() {
         setMyBatis3XmlMapperFileName(calculateMyBatis3XmlMapperFileName());
         setMyBatis3XmlMapperPackage(calculateSqlMapPackage());
@@ -411,6 +415,8 @@ public abstract class IntrospectedTable {
         setCountByExampleStatementId("countByExample"); //$NON-NLS-1$
         setDeleteByExampleStatementId("deleteByExample"); //$NON-NLS-1$
         setDeleteByPrimaryKeyStatementId("deleteByPrimaryKey"); //$NON-NLS-1$
+        //add
+        setDeleteBatchByPrimaryKeyStatementId("deleteBatchByPrimaryKey"); //$NON-NLS-1$
         setInsertStatementId("insert"); //$NON-NLS-1$
         setInsertSelectiveStatementId("insertSelective"); //$NON-NLS-1$
         setSelectAllStatementId("selectAll"); //$NON-NLS-1$
@@ -531,6 +537,15 @@ public abstract class IntrospectedTable {
                 InternalAttribute.ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID, s);
     }
 
+    /**
+     * 批量删除
+     * @param s
+     */
+    public void setDeleteBatchByPrimaryKeyStatementId(String s) {
+        internalAttributes.put(
+                InternalAttribute.ATTR_DELETE_BY_BATCH_IDS_STATEMENT_ID, s);
+    }
+
     public void setDeleteByExampleStatementId(String s) {
         internalAttributes.put(
                 InternalAttribute.ATTR_DELETE_BY_EXAMPLE_STATEMENT_ID, s);
@@ -634,6 +649,15 @@ public abstract class IntrospectedTable {
     public String getDeleteByPrimaryKeyStatementId() {
         return internalAttributes
                 .get(InternalAttribute.ATTR_DELETE_BY_PRIMARY_KEY_STATEMENT_ID);
+    }
+
+    /**
+     * 批量删除
+     * @return
+     */
+    public String getDeleteBatchByPrimaryKeyStatementId() {
+        return internalAttributes
+                .get(InternalAttribute.ATTR_DELETE_BY_BATCH_IDS_STATEMENT_ID);
     }
 
     public String getDeleteByExampleStatementId() {

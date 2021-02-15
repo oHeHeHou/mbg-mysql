@@ -31,6 +31,11 @@ public class MyBatis3FormattingUtilities {
         return getParameterClause(introspectedColumn, null);
     }
 
+    public static String getPrefixParameterClause(
+            String prefix, IntrospectedColumn introspectedColumn) {
+        return getParameterClause(introspectedColumn, prefix);
+    }
+
     public static String getParameterClause(
             IntrospectedColumn introspectedColumn, String prefix) {
         StringBuilder sb = new StringBuilder();

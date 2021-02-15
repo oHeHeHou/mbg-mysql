@@ -37,6 +37,7 @@ import org.mybatis.generator.api.dom.DefaultKotlinFormatter;
 import org.mybatis.generator.api.dom.DefaultXmlFormatter;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3Impl;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3SimpleImpl;
+import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMysqlCustomizedImpl;
 import org.mybatis.generator.config.CommentGeneratorConfiguration;
 import org.mybatis.generator.config.ConnectionFactoryConfiguration;
 import org.mybatis.generator.config.Context;
@@ -338,6 +339,8 @@ public class ObjectFactory {
             type = IntrospectedTableMyBatis3DynamicSqlImpl.class.getName();
         } else if ("MyBatis3Kotlin".equalsIgnoreCase(type)) { //$NON-NLS-1$
             type = IntrospectedTableKotlinImpl.class.getName();
+        } else if ("MysqlCustomize".equalsIgnoreCase(type)) { //针对Mysql定制化
+            type = IntrospectedTableMysqlCustomizedImpl.class.getName();
         }
 
         IntrospectedTable answer = (IntrospectedTable) createInternalObject(type);
