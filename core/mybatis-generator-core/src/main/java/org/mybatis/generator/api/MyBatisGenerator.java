@@ -290,6 +290,16 @@ public class MyBatisGenerator {
         callback.done();
     }
 
+    public List<Context> getContexts() throws Exception {
+        List<Context> contextsToRun = configuration.getContexts();
+        ProgressCallback callback = new ProgressCallback() {};
+        for (Context context : contextsToRun) {
+            context.introspectTables(callback, warnings,
+                    null);
+        }
+        return contextsToRun;
+    }
+
     private void writeGeneratedJavaFile(GeneratedJavaFile gjf, ProgressCallback callback)
             throws InterruptedException, IOException {
         File targetFile;
